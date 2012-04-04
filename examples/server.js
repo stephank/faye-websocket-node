@@ -6,8 +6,8 @@ var WebSocket = require('../lib/faye/websocket'),
 var port   = process.argv[2] || 7000,
     secure = process.argv[3] === 'ssl';
 
-var upgradeHandler = function(request, socket, head) {
-  var ws = new WebSocket(request, socket, head, ['irc', 'xmpp'], {ping: 5});
+var upgradeHandler = function(request, response) {
+  var ws = new WebSocket(request, response, ['irc', 'xmpp'], {ping: 5});
   console.log('open', ws.url, ws.version, ws.protocol);
   
   ws.onmessage = function(event) {
